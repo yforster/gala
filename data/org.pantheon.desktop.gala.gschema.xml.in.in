@@ -84,6 +84,11 @@
 	</schema>
 	
 	<schema path="/org/pantheon/desktop/gala/keybindings/" id="org.pantheon.desktop.gala.keybindings" gettext-domain="@GETTEXT_PACKAGE@">
+	        <key type="as" name="show-workspace-view">
+			<default><![CDATA[['<Super>Enter']]]></default>
+			<summary></summary>
+			<description></description>
+		</key>
 		<key type="as" name="switch-to-workspace-first">
 			<default><![CDATA[['<Super>Home']]]></default>
 			<summary>Shortcut to move to first workspace</summary>

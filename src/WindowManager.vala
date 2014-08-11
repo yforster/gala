@@ -127,6 +127,10 @@ namespace Gala
 
 			/*keybindings*/
 
+			screen.get_display ().add_keybinding ("show-workspace-view", KeybindingSettings.get_default ().schema, 0, () => {
+					perform_action(ActionType.SHOW_WORKSPACE_VIEW);
+			});
+
 			screen.get_display ().add_keybinding ("switch-to-workspace-first", KeybindingSettings.get_default ().schema, 0, () => {
 				screen.get_workspace_by_index (0).activate (screen.get_display ().get_current_time ());
 			});
