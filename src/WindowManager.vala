@@ -253,14 +253,48 @@ namespace Gala
 
 		void configure_hotcorners ()
 		{
-			var geometry = get_screen ().get_monitor_geometry (get_screen ().get_primary_monitor ());
+			if (get_screen ().get_n_monitors () > 1 && rectangular_screen ()) {
+				int screen_width, screen_height;
+				get_screen ().get_size (out screen_width, out screen_height);
 
-			add_hotcorner (geometry.x, geometry.y, "hotcorner-topleft");
-			add_hotcorner (geometry.x + geometry.width - 1, geometry.y, "hotcorner-topright");
-			add_hotcorner (geometry.x, geometry.y + geometry.height - 1, "hotcorner-bottomleft");
-			add_hotcorner (geometry.x + geometry.width - 1, geometry.y + geometry.height - 1, "hotcorner-bottomright");
+				add_hotcorner (0, 0, "hotcorner-topleft");
+				add_hotcorner (screen_width - 1, 0, "hotcorner-topright");
+				add_hotcorner (0, screen_height - 1, "hotcorner-bottomleft");
+				add_hotcorner (screen_width - 1, screen_height - 1, "hotcorner-bottomright");    
+			} else {
+				var primary_geometry = get_screen ().get_monitor_geometry (get_screen ().get_primary_monitor ());
+
+				add_hotcorner (primary_geometry.x, primary_geometry.y, "hotcorner-topleft");
+				add_hotcorner (primary_geometry.x + primary_geometry.width - 1, primary_geometry.y, "hotcorner-topright");
+				add_hotcorner (primary_geometry.x, primary_geometry.y + primary_geometry.height - 1, "hotcorner-bottomleft");
+				add_hotcorner (primary_geometry.x + primary_geometry.width - 1, primary_geometry.y + primary_geometry.height - 1, "hotcorner-bottomright");
+			}
 
 			update_input_area ();
+		}
+
+		bool rectangular_screen ()
+		{
+			var monitors_width = 0;
+			var monitors_height = 0;
+
+			for (var i = 0; i < get_screen ().get_n_monitors (); i++) {
+				var monitor_geometry = get_screen ().get_monitor_geometry(i);
+
+				if (monitor_geometry.x == 0)
+					monitors_height += monitor_geometry.height;
+
+				if (monitor_geometry.y == 0)
+					monitors_width += monitor_geometry.width;
+			}
+            
+			int screen_width, screen_height;
+			get_screen ().get_size (out screen_width, out screen_height);           
+
+			if (monitors_width == screen_width && monitors_height == screen_height)
+				return true;
+
+			return false;
 		}
 
 		void add_hotcorner (float x, float y, string key)
