@@ -45,13 +45,17 @@ And:
 	 	
 	 	<schema path="/org/pantheon/desktop/gala/keybindings/" id="org.pantheon.desktop.gala.keybindings" gettext-domain="@GETTEXT_PACKAGE@">
 	+        <key type="as" name="show-workspace-view">
-	+			<default><![CDATA[['<Super>Enter']]]></default>
+	+			<default><![CDATA[['<Super>s']]]></default>
 	+			<summary></summary>
 	+			<description></description>
 	+		</key>
 	 		<key type="as" name="switch-to-workspace-first">
 	 			<default><![CDATA[['<Super>Home']]]></default>
 	 			<summary>Shortcut to move to first workspace</summary>
+
+### Can I change the combination?###
+
+Sure. Simply change it in the file above before you build gala or after build in `/usr/share/glib-2.0/schemas/org.pantheon.desktop.gala.gschema.xml ` and compile schemas again as described in the installation section.
 
 ## Multi-monitor hot-corner fix ##
 
